@@ -1,0 +1,30 @@
+{
+  "name": "eco-score",
+  "description": "eco-score-node-js-server",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "4.17.1"
+  },
+  "devDependencies": {
+    "mocha": "9.1.1",
+    "supertest": "6.1.6"
+  },
+  "scripts": {
+    "start": "node indappex.js"
+  },
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BashkimM/EcoScore.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BashkimM/EcoScore/issues"
+  },
+  "homepage": "https://github.com/BashkimM/EcoScore#readme"
+}
