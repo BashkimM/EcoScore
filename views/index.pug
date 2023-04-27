@@ -1,0 +1,10 @@
+extends layouts/default.pug
+
+block content
+    h1 Hallo #{locals.text}
+
+
+    h1 EcoScore abfragen: 
+    form(action="/", method="post") 
+        input(type="text", name="ID")
+        button(type="submit" value="anlegen") 

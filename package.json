@@ -4,16 +4,16 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "express": "4.17.1"
-  },
-  "devDependencies": {
-    "mocha": "9.1.1",
-    "supertest": "6.1.6"
+    "express": "^4.17.1",
+    "nodemon": "^2.0.22",
+    "openfoodfacts-nodejs": "^0.1.0",
+    "pug": "^3.0.2"
   },
   "scripts": {
-    "start": "node indappex.js"
+    "dev": "nodemon server.js",
+    "start": "node server.js"
   },
-  "main": "index.js",
+  "main": "server.js",
   "directories": {
     "doc": "docs"
   },
