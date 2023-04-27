@@ -22,8 +22,12 @@ server.get('/', (request, respone) => {
 
 server.post("/",(request, response) => {
   console.log(request.body.ID)
-  client.getProduct(request.body.ID).then(console.log)
-  response.send ("Projekt angelegt")
+  client.getProduct(request.body.ID).then(product =>{
+    var obj = product
+    console.log(obj)
+    //var res = JSON.stringify(obj)
+    response.json({obj})
+  })
 })
 
 const projectRouter = require("./routes/projects");
