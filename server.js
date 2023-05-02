@@ -26,7 +26,10 @@ server.post("/",(request, response) => {
     var obj = product
     console.log(obj)
     //var res = JSON.stringify(obj)
-    response.json({obj})
+    //response.json({obj})
+
+    response.render("output", { obj });
+
   })
 })
 

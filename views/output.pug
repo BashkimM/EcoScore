@@ -1,0 +1,11 @@
+extends layouts/default.pug
+
+block content
+
+    h1 EcoScore für #{obj.code}
+    p Strichcode: #{obj.code}
+    p Hersteller: #{obj.product.brands}
+    p Produktname: #{obj.product.product_name}
+    p EcoScore: #{obj.product.ecoscore_grade}
+    p BildURL: #{obj.product.image_url}
+    img(src=obj.product.image_url)
