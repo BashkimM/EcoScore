@@ -7,7 +7,8 @@
     "express": "^4.17.1",
     "nodemon": "^2.0.22",
     "openfoodfacts-nodejs": "^0.1.0",
-    "pug": "^3.0.2"
+    "pug": "^3.0.2",
+    "quagga": "^0.12.1"
   },
   "scripts": {
     "dev": "nodemon server.js",
