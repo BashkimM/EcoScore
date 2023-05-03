@@ -5,7 +5,7 @@ block content
     video#player(controls='' autoplay='')
     button#capture Capture
     button#start Start
-    canvas#canvas(width='320' height='240')
+    canvas#canvas(width='640' height='480')
     script.
         const player = document.getElementById('player');
         const canvas = document.getElementById('canvas');
@@ -22,7 +22,7 @@ block content
             //player.srcObject.getVideoTracks().forEach(track=> track.stop());
             var httpPost = new window.XMLHttpRequest(),
             data = JSON.stringify({
-                image: frame
+                frame
             });
             httpPost.onreadystatechange = function(err) {
                 if (httpPost.readyState == 4 && httpPost.status == 200){
