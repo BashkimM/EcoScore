@@ -1,0 +1,28 @@
+extends layouts/default.pug
+
+block content
+
+    video#player(controls='' autoplay='')
+    button#capture Capture
+    button#start Start
+    canvas#canvas(width='320' height='240')
+    script.
+        const player = document.getElementById('player');
+        const canvas = document.getElementById('canvas');
+        const context = canvas.getContext('2d');
+        const captureButton = document.getElementById('capture');
+        const startButton = document.getElementById('start');
+        const constraints = {
+        video: true,
+        };
+        captureButton.addEventListener('click', () => {
+            context.drawImage(player, 0, 0, canvas.width, canvas.height);
+            // Stop all video streams. 
+            player.srcObject.getVideoTracks().forEach(track=> track.stop());
+        });
+        startButton.addEventListener('click', () => {
+            navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
+                // Attach the video stream to the video element and autoplay.
+                player.srcObject = stream;
+            });
+        });

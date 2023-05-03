@@ -20,6 +20,10 @@ server.get('/', (request, respone) => {
   respone.render("index", {text: "Jungs"});
 })
 
+server.get('/cam', (request, respone) => {
+  respone.render("take_picture");
+})
+
 server.post("/",(request, response) => {
   console.log(request.body.ID)
   client.getProduct(request.body.ID).then(product =>{
