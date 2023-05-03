@@ -2,6 +2,8 @@
 const express = require('express')
 const pug = require('pug')
 const openFF = require('openfoodfacts-nodejs');
+var bodyParser = require('body-parser')
+
 
 //Instanz wird generiert
 const server = express()
@@ -13,6 +15,7 @@ server.use(express.static("./public"));
 
 //Middlewares
 server.use(express.urlencoded({ extended: true}));
+server.use(bodyParser.json({limit: '10mb', extended: true}))
 
 //Routes
 server.get('/', (request, respone) => {
@@ -35,6 +38,12 @@ server.post("/",(request, response) => {
     response.render("output", { obj });
 
   })
+})
+
+server.post("/upload",(request, response) => {
+  var num = request.body
+  console.log(num)
+  return response.end('Done')
 })
 
 const projectRouter = require("./routes/projects");
