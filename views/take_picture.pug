@@ -5,13 +5,19 @@ block content
     video#player(controls='' autoplay='')
     button#capture Capture
     button#start Start
-    canvas#canvas(width='640' height='480')
+    canvas#canvas(hidden width='640' height='480')
+
+    div(id="add_to_me")
+        h1 Resultobject:
+
     script.
         const player = document.getElementById('player');
         const canvas = document.getElementById('canvas');
         const context = canvas.getContext('2d');
         const captureButton = document.getElementById('capture');
         const startButton = document.getElementById('start');
+        const divEl = document.getElementById('add_to_me');
+
         const constraints = {
         video: true,
         };
@@ -42,5 +48,4 @@ block content
                 player.srcObject = stream;
             });
         });
-
         

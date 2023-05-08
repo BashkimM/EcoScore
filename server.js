@@ -52,7 +52,7 @@ server.post("/upload",(request, response) => {
 
   //DO STUFF WITH FILE
   Quagga.decodeSingle({
-    src: "barcode3.png",
+    src: "barcode2.png",
     numOfWorkers: 0,  // Needs to be 0 when used within node
     inputStream: {
         size: 640  // restrict input-size to be 800px in width (long-side)
@@ -66,11 +66,7 @@ server.post("/upload",(request, response) => {
         console.log("result", result.codeResult.code);
         client.getProduct(result.codeResult.code).then(product =>{
           var obj = product
-          //console.log(obj)
-          //var res = JSON.stringify(obj)
-          //response.json({obj})
-      
-          response.render("output", { obj });
+          response.render("output",{obj});
         })
       } else {
         console.log("not detected", result);
