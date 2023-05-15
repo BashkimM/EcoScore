@@ -1,12 +1,32 @@
-extends layouts/default.pug
-
-block content
-    h1 Hallo #{locals.text}
-
-
-    h1 EcoScore abfragen: 
-    form(action="/", method="post") 
-        input(type="text", name="ID")
-        button(type="submit" value="anlegen") 
-
-    h1 #{locals.EcoScore}
+doctype html
+html(lang="de")
+  head
+    meta(charset="UTF-8")
+    title EcoScore
+    link(rel="stylesheet" href="/css/style.css")
+  body
+    header
+      div(class='logo')
+        a(href='/')
+          img(src='images/ecoscore/logo.svg', alt='EcoScore')
+      nav
+        form(action='/', method='post', id='searchbar')
+          input(type='text', placeholder='Strichcode eingeben...', name="ID")
+          button(type='submit') Suche
+      div(class='shoppingcart')
+        a(href='/')
+          img(src='images/icons/shopping-cart.png', alt='Shoppingcart')
+    main
+      if obj
+        div(class='product')
+          img(class='productimage', src=obj.product.image_url)
+          ul(class='list')
+            li #{obj.code}
+            li #{obj.product.brands}
+            li #{obj.product.product_name}
+          img(class='ecoscoreimage', src="/images/ecoscore/ecoscore-d.svg")
+    footer
+      ul
+        li Lorem ipsum
+        li Lorem ipsum
+        li Lorem ipsum

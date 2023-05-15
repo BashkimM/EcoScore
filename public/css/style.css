@@ -1,8 +1,109 @@
+header {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 20rem;
+    /*background-color: white;*/
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1;
+}
+.logo {
+    padding: 0 5rem 0 5rem;
+    display: flex;
+    width: 10rem;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+}
+.shoppingcart {
+    padding: 0 5rem 0 5rem;
+    display: flex;
+    width: auto;
+    height: auto;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+}
+.shoppingcart img {
+    max-width: 10rem;
+    max-height: 10rem;
+    margin: 0 0 0 1rem;
+}
+#searchbar {
+    color: #555;
+    display: flex;
+    padding: 2px;
+    border: 1px solid currentColor;
+    border-radius: 5px;
+}
+#searchbar input {
+    border: none;
+    background: transparent;
+    margin: 0;
+    padding: 7px 8px;
+    font-size: 14px;
+    color: inherit;
+    border: 1px solid transparent;
+    border-radius: inherit;
+}
+#searchbar input::placeholder {
+    color: black;
+}
+#searchbar button {
+    text-indent: -999px;
+    overflow: hidden;
+    width: 40px;
+    padding: 0;
+    margin: 0;
+    border: 1px solid transparent;
+    border-radius: inherit;
+    background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E") no-repeat center;
+    cursor: pointer;
+    opacity: 0.7;
+}
 body {
-    color: white;
-    background-color: darkslategrey;
+    color: black;
+    background-color: whitesmoke;
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.product {
+    display: inline-block;
+    text-align: center;
+    background-color: white;
+    border: 1px solid black;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    border-radius: 5px;
+    padding: 10px;
+}
+.list {
+    list-style: none;
 }
 
-a{
-    color: white;
+footer {
+    position: absolute;
+    margin-top: auto;
+    bottom: 0;
+    width: 100%;
+    height: 5rem;
+    /*background-color: white;*/
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+footer ul {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: row;
+}
+footer li {
+    list-style: none;
+    margin: 0 2rem 0 2rem;
 }

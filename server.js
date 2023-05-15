@@ -32,7 +32,7 @@ server.post("/",(request, response) => {
   console.log(request.body.ID)
   client.getProduct(request.body.ID).then(product =>{
     var obj = product
-    response.render("output", { obj });
+    response.render("index", { obj });
   })
 })
 
