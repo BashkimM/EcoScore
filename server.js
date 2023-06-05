@@ -52,7 +52,7 @@ server.post("/upload",(request, response) => {
 
   //DO STUFF WITH FILE
   Quagga.decodeSingle({
-    src: "barcode2.png",
+    src: "barcode3.png",
     numOfWorkers: 0,  // Needs to be 0 when used within node
     inputStream: {
         size: 640  // restrict input-size to be 800px in width (long-side)
@@ -64,10 +64,8 @@ server.post("/upload",(request, response) => {
     }, function(result) {
       if(result.codeResult) {
         console.log("result", result.codeResult.code);
-        client.getProduct(result.codeResult.code).then(product =>{
-          var obj = product
-          response.render("output",{obj});
-        })
+          barcode = result.codeResult.code
+          response.send({barcode});
       } else {
         console.log("not detected", result);
       }
@@ -75,9 +73,6 @@ server.post("/upload",(request, response) => {
   //DELETE FILE AND RESPONSE
   //fs.unlinkSync("image.png");
 })
-
-const projectRouter = require("./routes/projects");
-server.use("/projekte", projectRouter);
 
 // Webserver listen auf Port 3000
 server.listen('3000', () => console.log("Server gestartet"));

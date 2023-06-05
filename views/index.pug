@@ -4,19 +4,25 @@ html(lang="de")
     meta(charset="UTF-8")
     title EcoScore
     link(rel="stylesheet" href="/css/style.css")
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
   body
     header
       div(class='logo')
         a(href='/')
           img(src='images/ecoscore/logo.svg', alt='EcoScore')
-      nav
+      div(class='menu')
         form(action='/', method='post', id='searchbar')
-          input(type='text', placeholder='Strichcode eingeben...', name="ID")
+          input#strichcode(type='text', placeholder='Strichcode eingeben...', name="ID")
           button(type='submit') Suche
+        button#start(class="cambutton")
+          i.fa.fa-camera
       div(class='shoppingcart')
         a(href='/')
           img(src='images/icons/shopping-cart.png', alt='Shoppingcart')
     main
+      video#player(autoplay=''  style="display:none")
+      button#capture(style="display:none") FOTO
+      canvas#canvas(hidden width='640' height='480')
       if obj
         div(class='product')
           img(class='productimage', src=obj.product.image_url)
@@ -30,3 +36,52 @@ html(lang="de")
         li Lorem ipsum
         li Lorem ipsum
         li Lorem ipsum
+
+script.
+  const player = document.getElementById('player');
+  const canvas = document.getElementById('canvas');
+  const context = canvas.getContext('2d');
+  const captureButton = document.getElementById('capture');
+  const startButton = document.getElementById('start');
+  const strichcode = document.getElementById('strichcode');
+
+
+  const constraints = {
+    video: true,
+  };
+
+  captureButton.addEventListener('click', () => {
+    context.drawImage(player, 0, 0, canvas.width, canvas.height);
+    // Stop all video streams. 
+    const frame = canvas.toDataURL("image/png");
+    //player.srcObject.getVideoTracks().forEach(track=> track.stop());
+    var httpPost = new window.XMLHttpRequest(),
+      data = JSON.stringify({
+        frame
+      });
+      httpPost.onreadystatechange = function(err) {
+      if (httpPost.readyState == 4 && httpPost.status == 200){
+        console.log(httpPost.responseText);
+        result = JSON.parse(httpPost.responseText);
+        strichcode.value = Object.values(result);
+      } else {
+        console.log(err);
+      }
+    };
+    httpPost.open("POST","/upload", true);
+    // Set the content type of the request to json since that's what's being sent
+    httpPost.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    httpPost.send(data);
+
+    player.style.display = "none";
+    capture.style.display = "none";
+  });
+
+  startButton.addEventListener('click', () => {
+    player.style.display = "block";
+    capture.style.display = "block";
+    navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
+      // Attach the video stream to the video element and autoplay.
+      player.srcObject = stream;
+    });
+  });

@@ -33,12 +33,22 @@ header {
     max-height: 10rem;
     margin: 0 0 0 1rem;
 }
+
+
+.cambutton {
+    font-size: 28px ;
+    cursor: pointer;
+    opacity: 0.7;
+    float: left;
+}
+
 #searchbar {
     color: #555;
     display: flex;
     padding: 2px;
     border: 1px solid currentColor;
     border-radius: 5px;
+    float: right;
 }
 #searchbar input {
     border: none;
@@ -65,6 +75,7 @@ header {
     cursor: pointer;
     opacity: 0.7;
 }
+
 body {
     color: black;
     background-color: whitesmoke;
