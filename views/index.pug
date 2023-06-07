@@ -24,13 +24,63 @@ html(lang="de")
       button#capture(style="display:none") FOTO
       canvas#canvas(hidden width='640' height='480')
       if obj
-        div(class='product')
-          img(class='productimage', src=obj.product.image_url)
-          ul(class='list')
-            li #{obj.code}
-            li #{obj.product.brands}
-            li #{obj.product.product_name}
-          img(class='ecoscoreimage', src=img_src)
+        div(class='product', hidden)
+          img#image(class='productimage', src=obj.product.image_url, hidden)
+          ul(class='list', hidden)
+            li#code(hidden) #{obj.code}
+            li#brand(hidden) #{obj.product.brands}
+            li#product(hidden) #{obj.product.product_name}
+          img#pclass(class='ecoscoreimage', src=img_src, hidden)
+        script.
+          var image = document.getElementById('image').src;
+          var code = document.getElementById('code').innerHTML;
+          var brand = document.getElementById('brand').innerHTML;
+          var product = document.getElementById('product').innerHTML;
+          var pclass = document.getElementById('pclass').src;
+
+          sessionStorage.setItem(sessionStorage.length, image)
+          sessionStorage.setItem(sessionStorage.length, code)
+          sessionStorage.setItem(sessionStorage.length, brand)
+          sessionStorage.setItem(sessionStorage.length, product)
+          sessionStorage.setItem(sessionStorage.length, pclass)
+
+          for(i=0; i <= sessionStorage.length-1 ; i+=5){
+            console.log(sessionStorage.getItem(i))
+            console.log(sessionStorage.getItem(i+1))
+            console.log(sessionStorage.getItem(i+2))
+            console.log(sessionStorage.getItem(i+3))
+            console.log(sessionStorage.getItem(i+4))
+
+            var html_div = document.createElement('div');
+            html_div.classList.add('product')
+            html_div.id = i
+            document.body.append(html_div)
+
+            var html_img = document.createElement("img");
+            html_img.src = sessionStorage.getItem(i)
+            document.getElementById(i).appendChild(html_img)
+
+            var html_ul = document.createElement('ul');
+            html_ul.classList.add('list')
+            html_ul.id = i+1000
+            document.getElementById(i).appendChild(html_ul)
+
+            var html_code = document.createElement('li');
+            html_code.textContent = sessionStorage.getItem(i+1)
+            document.getElementById(i+1000).appendChild(html_code)
+
+            var html_brand = document.createElement('li');
+            html_brand.textContent = sessionStorage.getItem(i+2)
+            document.getElementById(i+1000).appendChild(html_brand)
+
+            var html_product = document.createElement('li');
+            html_product.textContent = sessionStorage.getItem(i+3)
+            document.getElementById(i+1000).appendChild(html_product)
+
+            var html_img_2 = document.createElement("img");
+            html_img_2.src = sessionStorage.getItem(i+4)
+            document.getElementById(i).appendChild(html_img_2)
+          } 
       if notfound 
         script.
            document.getElementById('strichcode').placeholder = 'Strichcode nicht erkannt...';
