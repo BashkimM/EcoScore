@@ -32,7 +32,23 @@ server.post("/",(request, response) => {
   console.log(request.body.ID)
   client.getProduct(request.body.ID).then(product =>{
     var obj = product
-    response.render("index", { obj });
+    var img_src;
+
+    if (obj.product.ecoscore_grade === "a") {
+      img_src = "/images/ecoscore/ecoscore-a.svg";
+    } else if (obj.product.ecoscore_grade === "b") {
+      img_src = "/images/ecoscore/ecoscore-b.svg";
+    } else if (obj.product.ecoscore_grade === "c") {
+      img_src = "/images/ecoscore/ecoscore-c.svg";
+    } else if (obj.product.ecoscore_grade === "d") {
+      img_src = "/images/ecoscore/ecoscore-d.svg";
+    } else if (obj.product.ecoscore_grade === "e") {
+      img_src = "/images/ecoscore/ecoscore-e.svg";
+    } else {
+      img_src = "/images/ecoscore/ecoscore-unknown.svg";
+    }
+
+    response.render("index", { obj, img_src });
   })
 })
 
