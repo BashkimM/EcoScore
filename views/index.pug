@@ -31,6 +31,9 @@ html(lang="de")
             li #{obj.product.brands}
             li #{obj.product.product_name}
           img(class='ecoscoreimage', src=img_src)
+      if notfound 
+        script.
+           document.getElementById('strichcode').placeholder = 'Strichcode nicht erkannt...';
     footer
       ul
         li Lorem ipsum
