@@ -97,7 +97,7 @@ body {
 }
 
 footer {
-    position: absolute;
+    position: relative;
     margin-top: auto;
     bottom: 0;
     width: 100%;
