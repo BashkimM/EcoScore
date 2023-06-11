@@ -67,7 +67,6 @@ server.post("/upload",(request, response) => {
   // Store Image into Server
   const buffer = Buffer.from(base64Data, "base64");
   fs.writeFileSync("image.png", buffer);
-  fs.writeFileSync("image.txt", base64Data);
 
   //DO STUFF WITH FILE
   Quagga.decodeSingle({
@@ -89,8 +88,8 @@ server.post("/upload",(request, response) => {
         console.log("not detected", result);
       }
     });
-  //DELETE FILE AND RESPONSE
-  //fs.unlinkSync("image.png");
+
+  fs.unlinkSync("image.png");
 })
 
 // Webserver listen auf Port 3000
