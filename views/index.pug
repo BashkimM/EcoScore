@@ -20,17 +20,39 @@ html(lang="de")
         a(href='/')
           img(src='images/ecoscore/logo.svg', alt='EcoScore')
     main
-      video#player(autoplay=''  style="display:none")
-      button#capture(style="display:none") FOTO
-      canvas#canvas(hidden width='640' height='480')
+      #content(hidden)
+        .center-screen  
+          .overlay
+            .overlay-helper
+              .overlay-element.top-left
+                span#overlay-top-left-text.overlay-text
+                  | &#x1F534; REC
+              .overlay-element.top-right
+                span#overlay-top-right-text.overlay-text
+                  | 00:00
+              .overlay-element.bottom-left
+                span#overlay-bottom-left-text.overlay-text
+                  | 25 FPS
+              .overlay-element.bottom-middle
+                span#overlay-bottom-left-text.overlay-text
+                  button#capture(class="cambutton")
+                    i.fa.fa-camera
+              .overlay-element.bottom-right
+                span#overlay-bottom-right-text.overlay-text
+                  | 1280x720
+          video#player(autoplay=''  style="display:none" width='1280' height='720')
+          //button#capture(style="display:none") FOTO
+          canvas#canvas(hidden width='1280' height='720')
       if obj
-        div(class='product', hidden)
-          img#image(class='productimage', src=obj.product.image_url, hidden)
-          ul(class='list', hidden)
-            li#code(hidden) #{obj.code}
-            li#brand(hidden) #{obj.product.brands}
-            li#product(hidden) #{obj.product.product_name}
-          img#pclass(class='ecoscoreimage', src=img_src, hidden)
+        h2 Your Result
+        div(class='product')
+          img#image(class='productimage', src=obj.product.image_url)
+          ul(class='list')
+            li#code #{obj.code}
+            li#brand #{obj.product.brands}
+            li#product #{obj.product.product_name}
+          img#pclass(class='ecoscoreimage', src=img_src)
+
         script.
           var image = document.getElementById('image').src;
           var code = document.getElementById('code').innerHTML;
@@ -38,11 +60,11 @@ html(lang="de")
           var product = document.getElementById('product').innerHTML;
           var pclass = document.getElementById('pclass').src;
 
-          sessionStorage.setItem(sessionStorage.length, image)
-          sessionStorage.setItem(sessionStorage.length, code)
-          sessionStorage.setItem(sessionStorage.length, brand)
-          sessionStorage.setItem(sessionStorage.length, product)
-          sessionStorage.setItem(sessionStorage.length, pclass)
+          if(sessionStorage.length != 0){
+            var historyelement = document.createElement("h2");
+            historyelement.innerHTML = "History";
+            document.body.append(historyelement);
+          }
 
           for(i=0; i <= sessionStorage.length-1 ; i+=5){
             console.log(sessionStorage.getItem(i))
@@ -80,17 +102,20 @@ html(lang="de")
             var html_img_2 = document.createElement("img");
             html_img_2.src = sessionStorage.getItem(i+4)
             document.getElementById(i).appendChild(html_img_2)
-          } 
+          }
+
+          sessionStorage.setItem(sessionStorage.length, image)
+          sessionStorage.setItem(sessionStorage.length, code)
+          sessionStorage.setItem(sessionStorage.length, brand)
+          sessionStorage.setItem(sessionStorage.length, product)
+          sessionStorage.setItem(sessionStorage.length, pclass)
+           
       if notfound 
         script.
            document.getElementById('strichcode').placeholder = 'Strichcode nicht erkannt...';
-    footer
-      ul
-        li Lorem ipsum
-        li Lorem ipsum
-        li Lorem ipsum
 
 script.
+  const content = document.getElementById('content');
   const player = document.getElementById('player');
   const canvas = document.getElementById('canvas');
   const context = canvas.getContext('2d');
@@ -128,9 +153,11 @@ script.
 
     player.style.display = "none";
     capture.style.display = "none";
+    content.style.display = "none";
   });
 
   startButton.addEventListener('click', () => {
+    content.style.display = "block";
     player.style.display = "block";
     capture.style.display = "block";
     navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
